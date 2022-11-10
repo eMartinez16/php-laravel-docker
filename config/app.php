@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => (bool) env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'es',
 
     /*
     |--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'es',
 
     /*
     |--------------------------------------------------------------------------
@@ -133,6 +133,41 @@ return [
     | this array to grant expanded functionality to your applications.
     |
     */
+
+    "CUIT_PRODUCCION"  => env('CUIT_PRODUCCION'),
+    "CUIT_FACTURACION" => env('CUIT_FACTURACION'),
+    //casi no se usa
+    'CUIT_TESTING'     => env('CUIT_TESTING'),
+
+    'KEY_PROD'  => env('PATH_PRODUCTION_KEY'),
+    'CRT_PROD'  => env('PATH_PRODUCTION_CRT'),
+
+    'KEY_BILLING' => env('PATH_BILLING_KEY'),
+    'CRT_BILLING' => env('PATH_BILLING_CRT'),
+
+    //sin uso
+    'KEY_TESTING' => env('PATH_TESTING_KEY'),
+    'CRT_TESTING' => env('PATH_TESTING_CRT'),
+
+    "PUNTO_VENTA" => env('punto_venta'),
+
+    "RAZON_SOCIAL" => env('razon_social'),
+
+    "DOMICILIO_COMERCIAL" => env('domicilio_comercial'),
+    
+    "CONDICION_FISCAL" => env('condicion_iva'),
+
+    'INICIO_ACT' => env('inicio_actividades'),
+
+    "PUNTO_VENTA" => env('punto_venta'),
+
+    "RAZON_SOCIAL" => env('razon_social'),
+
+    "DOMICILIO_COMERCIAL" => env('domicilio_comercial'),
+    
+    "CONDICION_FISCAL" => env('condicion_iva'),
+
+    'INICIO_ACT' => env('inicio_actividades'),
 
     'providers' => [
 
@@ -175,6 +210,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        // iziToast
+        LaraIzitoast\LaraIzitoastServiceProvider::class,
+
+        Barryvdh\DomPDF\ServiceProvider::class,
     ],
 
     /*
@@ -201,20 +240,25 @@ return [
         'Config' => Illuminate\Support\Facades\Config::class,
         'Cookie' => Illuminate\Support\Facades\Cookie::class,
         'Crypt' => Illuminate\Support\Facades\Crypt::class,
+        'Date' => Illuminate\Support\Facades\Date::class,
         'DB' => Illuminate\Support\Facades\DB::class,
         'Eloquent' => Illuminate\Database\Eloquent\Model::class,
         'Event' => Illuminate\Support\Facades\Event::class,
         'File' => Illuminate\Support\Facades\File::class,
         'Gate' => Illuminate\Support\Facades\Gate::class,
         'Hash' => Illuminate\Support\Facades\Hash::class,
+        'Http' => Illuminate\Support\Facades\Http::class,
+        'Js' => Illuminate\Support\Js::class,
         'Lang' => Illuminate\Support\Facades\Lang::class,
         'Log' => Illuminate\Support\Facades\Log::class,
         'Mail' => Illuminate\Support\Facades\Mail::class,
         'Notification' => Illuminate\Support\Facades\Notification::class,
         'Password' => Illuminate\Support\Facades\Password::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
         'Queue' => Illuminate\Support\Facades\Queue::class,
+        'RateLimiter' => Illuminate\Support\Facades\RateLimiter::class,
         'Redirect' => Illuminate\Support\Facades\Redirect::class,
-        'Redis' => Illuminate\Support\Facades\Redis::class,
+        // 'Redis' => Illuminate\Support\Facades\Redis::class,
         'Request' => Illuminate\Support\Facades\Request::class,
         'Response' => Illuminate\Support\Facades\Response::class,
         'Route' => Illuminate\Support\Facades\Route::class,
@@ -228,4 +272,5 @@ return [
 
     ],
 
+    'CUIT' => env('CUIT'),
 ];

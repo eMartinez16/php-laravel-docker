@@ -1,65 +1,59 @@
-@extends('layouts.app')
-
+@extends('layouts.auth_app')
+@section('title')
+    Resetear Contraseña
+@endsection
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+    <div class="card card-primary">
+        <div class="card-header"><h4>Ingrese una nueva contraseña</h4></div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('password.update') }}">
-                        @csrf
-
-                        <input type="hidden" name="token" value="{{ $token }}">
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Reset Password') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+        <div class="card-body">
+            <form method="POST" action="{{ url('/password/reset') }}">
+                @csrf
+                @if ($errors->any())
+                    <div class="alert alert-danger p-0">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <input type="hidden" name="token" value="{{ $token }}">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
+                           name="email" tabindex="1" value="{{ old('email') }}" autofocus>
+                    <div class="invalid-feedback">
+                        {{ $errors->first('email') }}
+                    </div>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label for="password" class="control-label">Contraseña</label>
+                    <input id="password" type="password"
+                           class="form-control{{ $errors->has('password') ? ' is-invalid': '' }}" name="password"
+                           tabindex="2">
+                    <div class="invalid-feedback">
+                        {{ $errors->first('password') }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password_confirmation" class="control-label">Confirmar Contraseña</label>
+                    <input id="password_confirmation" type="password"
+                           class="form-control{{ $errors->has('password_confirmation') ? ' is-invalid': '' }}"
+                           name="password_confirmation" tabindex="2">
+                    <div class="invalid-feedback">
+                        {{ $errors->first('password_confirmation') }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
+                      Nueva contraseña
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
-</div>
+    <div class="mt-5 text-muted text-center">        
+        ¿Recordó sus credenciales? <a href="{{ route('login') }}">Iniciar sesión</a>
+    </div>
 @endsection

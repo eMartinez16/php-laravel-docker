@@ -1,0 +1,12 @@
+variables:
+  HEROKU_APP_NAME: "Heroku"
+  HEROKU_PRODUCTION_KEY: "141ce38c-5b35-4399-991c-480611ebc176"
+
+deploy to heroku:
+  stage: deploy
+  script:
+  - apt-get update -qq
+  - apt-get install -y -qq git
+  - apt-get install -y ruby
+  - gem install dpl
+  - dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_PRODUCTION_KEY
