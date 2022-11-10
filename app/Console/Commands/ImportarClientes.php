@@ -63,7 +63,7 @@ class ImportarClientes extends Command
               $location = $arrCliente[4];
               $payment_condition = $arrCliente[5];
               if($all){
-                $c = Client::where('cuit',$cuit)->first();
+                $c = Client::where('CUIT',$cuit)->first();
                 if(empty($valid)) {
                   $c = new Client();
                 }
@@ -80,7 +80,7 @@ class ImportarClientes extends Command
                 $c->disabled = false;
                 $c->save();
               } else {
-                $valid = Client::where('cuit',$cuit)->first();
+                $valid = Client::where('CUIT',$cuit)->first();
                 if(empty($valid)) {
                   $c = new Client();
                   $c->liable = $nombre ?? null;

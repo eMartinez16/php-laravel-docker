@@ -12,14 +12,12 @@ php artisan route:cache
 echo "Running migrations..."
 php artisan migrate --force
 
-echo "Running user seed"
-php artisan db:seed --class=UserSeeder
 
 echo "Running seeders"
-php artisan db:seed 
+php artisan db:seed --force
 
 echo "Importando clientes.."
-php artisan importar:clientes
+php artisan importar:clientes --force
 
 echo "Importando ensayos.."
-php artisan importar:ensayos
+php artisan importar:ensayos --force
